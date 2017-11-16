@@ -7,6 +7,8 @@ const webpackMerge = require('webpack-merge');
 const TypedocWebpackPlugin = require('typedoc-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const WatchLiveReloadPlugin = require('webpack-watch-livereload-plugin');
+
 let env = process && process.env && process.env.NODE_ENV;
 let dev = !(env && env === 'production');
 let devtool = (dev === false) ? '' : 'source-map';
@@ -31,6 +33,11 @@ let webpack_path = [
 
 // Опциональные зависимости
 let plugins = [
+     new WatchLiveReloadPlugin({
+        files: [
+            './index.html',
+        ]
+    }),
     new webpack.ProvidePlugin({
         $: 'jquery',
         jQuery: 'jquery',

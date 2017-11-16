@@ -5,7 +5,7 @@
 npm install
 
 ## Сборка dev
-- npm run build:dev
+- npm run dev
 
 ## Сборка production
-- npm run build:prod
+- npm run prod

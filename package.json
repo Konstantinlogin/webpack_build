@@ -8,10 +8,10 @@
     "npm": "~5.3.0"
   },
   "scripts": {
-    "build:dev": "cross-env NODE_ENV=developer webpack --colors --watch",
-    "build:prod": "npm run clean && cross-env NODE_ENV=production webpack --colors -p",
-    "build:analizer": "cross-env NODE_ENV=analizer webpack --colors --watch",
-    "build:doc": "npm run clean && cross-env NODE_ENV=documentation webpack --colors",
+    "dev": "cross-env NODE_ENV=developer webpack --colors --watch",
+    "prod": "npm run clean && cross-env NODE_ENV=production webpack --colors -p",
+    "analize": "cross-env NODE_ENV=analizer webpack --colors --watch",
+    "doc": "npm run clean && cross-env NODE_ENV=documentation webpack --colors",
     "clean": "rimraf ../ui/js/docs/** && rimraf ../ui/js/**.js.map && rimraf ../help/js/webpack/dist/docs/** && rimraf ../help/js/webpack/dist/**.js.map && rimraf stats.json",
     "tslint": "tslint -e **/node_modules/** -t codeFrame www/js/webpack/src/**/*.ts pr/js/webpack/src/**/*.ts"
   },
