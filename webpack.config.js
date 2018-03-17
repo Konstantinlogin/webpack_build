@@ -6,10 +6,12 @@ const webpackMerge = require('webpack-merge');
 const TypedocWebpackPlugin = require('typedoc-webpack-plugin');
 const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
+const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let env = process && process.env && process.env.NODE_ENV;
 let dev = !(env && env === 'production');
-let devtool = (dev === false) ? '' : 'source-map';
+let devtool = dev ? '' : 'source-map';
 const babelSettings = {
     extends: path.join(__dirname, '/.babelrc')
 };
@@ -20,21 +22,30 @@ let webpack_path = [
             main: path.resolve(__dirname, './source/js/project.js')
         },
         output: {
-            filename: 'project.js',
-            path: path.resolve(__dirname, './bundle/')
+            filename: './js/project.js',
+            path: path.resolve(__dirname, './bundle')
         },
         plugins: [
-            new ExtractTextPlugin('./project.css')
+            new ExtractTextPlugin('./css/project.css')
         ]
     }
 ];
 
-// Опциональные зависимости
+
 let plugins = [
-    new webpack.ProvidePlugin({
-        $: 'jquery',
-        jQuery: 'jquery',
-        jquery: 'jquery'
+    // new webpack.ProvidePlugin({
+    //     $: 'jquery',
+    //     jQuery: 'jquery',
+    //     jquery: 'jquery'
+    // }),
+    new HtmlWebpackPlugin({
+        template: 'source/index.html',
+        chunks: ['index']
+    }),
+    new BrowserSyncPlugin({
+        host: 'localhost',
+        port: 3000,
+        server: { baseDir: ['bundle'] }
     })
 ];
 
@@ -58,7 +69,7 @@ if (env === 'documentation') {
 if (env === 'production') {
     plugins.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
-            warnings:     false,
+            warnings:false,
             drop_console: true
         },
         output: {
@@ -81,7 +92,6 @@ let baseConfig = {
             test: /\.js$/,
             include: [
                 path.resolve(__dirname, './source'),
-
             ],
             use: [
                 {

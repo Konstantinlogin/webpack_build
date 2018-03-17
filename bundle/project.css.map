@@ -1,1 +1,0 @@
-{"version":3,"sources":["webpack:///./source/css/source/css/partials/partial_example.sass"],"names":[],"mappings":"AAAA;EACI,aAAY,EAAI","file":"./project.css","sourcesContent":["body {\n    color: green; }\n\n\n\n// WEBPACK FOOTER //\n// ./source/css/source/css/partials/partial_example.sass"],"sourceRoot":""}
