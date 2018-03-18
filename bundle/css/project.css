@@ -297,4 +297,7 @@ template {
 [hidden] {
   display: none; }
 
+body {
+  background-image: url(/images/12345.jpg); }
+
 /*# sourceMappingURL=project.css.map*/

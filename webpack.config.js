@@ -8,6 +8,7 @@ const ExtractTextPlugin = require('extract-text-webpack-plugin');
 const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 let env = process && process.env && process.env.NODE_ENV;
 let dev = !(env && env === 'production');
@@ -39,6 +40,16 @@ let plugins = [
     //     jQuery: 'jquery',
     //     jquery: 'jquery'
     // }),
+    new CopyWebpackPlugin([
+        {
+            from: 'source/images',
+            to: 'images'
+        },
+        {
+            from: 'source/fonts',
+            to: 'fonts'
+        },
+    ]),
     new HtmlWebpackPlugin({
         template: 'source/index.html',
         chunks: ['index']
@@ -70,7 +81,7 @@ if (env === 'documentation') {
 if (env === 'production') {
     plugins.push(new webpack.optimize.UglifyJsPlugin({
         compress: {
-            warnings:false,
+            warnings: false,
             drop_console: true
         },
         sourceMap: true,
@@ -100,7 +111,7 @@ let baseConfig = {
                     loader: 'babel-loader?' + JSON.stringify(babelSettings)
                 }
             ]
-        },{
+        }, {
             test: /\.ts$/,
             include: [
                 path.resolve(__dirname, './source'),
@@ -113,7 +124,7 @@ let baseConfig = {
                     loader: 'awesome-typescript-loader'
                 }
             ]
-        },{
+        }, {
             test: /\.sass$/,
             use: ExtractTextPlugin.extract({
                 use: [{
@@ -128,6 +139,9 @@ let baseConfig = {
                 }],
                 fallback: 'style-loader'
             })
+        }, {
+            test: /\.(jpe?g|png|gif|svg)$/i,
+            use: ['file-loader?name=/images/[name].[ext]']
         }]
     },
     plugins: plugins
