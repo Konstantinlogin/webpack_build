@@ -11,7 +11,8 @@ const HtmlWebpackPlugin = require('html-webpack-plugin');
 
 let env = process && process.env && process.env.NODE_ENV;
 let dev = !(env && env === 'production');
-let devtool = dev ? '' : 'source-map';
+let devtool = 'source-map';
+
 const babelSettings = {
     extends: path.join(__dirname, '/.babelrc')
 };
@@ -72,6 +73,7 @@ if (env === 'production') {
             warnings:false,
             drop_console: true
         },
+        sourceMap: true,
         output: {
             comments: false
         }

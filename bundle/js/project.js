@@ -82,9 +82,9 @@ function _interopRequireWildcard(obj) { if (obj && obj.__esModule) { return obj;
 
 (0, _function_export_example.example_function)();
 
-$(document).ready(function () {
-    console.log('test jquery');
-});
+// $(document).ready(function(){
+//     console.log('test jquery')
+// });
 
 /***/ }),
 /* 1 */
@@ -99,8 +99,7 @@ $(document).ready(function () {
 "use strict";
 
 
-var not_var = 'test degradation';
-document.write('all file export example' + '<br/>' + not_var);
+console.log('Module ready');
 
 /***/ }),
 /* 3 */
@@ -114,9 +113,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.example_function = example_function;
 function example_function() {
-    var not_var = 'test degradation 2';
-    document.write('function export example' + '<br/>' + not_var);
+    console.log('export ready');
 };
 
 /***/ })
 /******/ ]);
+//# sourceMappingURL=project.js.map
