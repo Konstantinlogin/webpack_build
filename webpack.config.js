@@ -115,17 +115,16 @@ let baseConfig = {
             test: /\.sass$/,
             use: ExtractTextPlugin.extract({
                 use: [{
-                    loader: "css-loader", options: {
+                    loader: 'css-loader', options: {
                         sourceMap: true
                     }
                 }, {
-                    loader: "sass-loader", options: {
+                    loader: 'sass-loader', options: {
                         includePaths: ['node_modules/compass-mixins/lib'],
                         sourceMap: true
                     }
                 }],
-                // use style-loader in development
-                fallback: "style-loader"
+                fallback: 'style-loader'
             })
         }]
     },
