@@ -9,6 +9,8 @@ const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPl
 const BrowserSyncPlugin = require('browser-sync-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
+const WebpackCleanupPlugin = require('webpack-cleanup-plugin');
+const AutoCleanBuildPlugin = require('webpack-auto-clean-build-plugin');
 
 let env = process && process.env && process.env.NODE_ENV;
 let dev = !(env && env === 'production');
@@ -40,6 +42,7 @@ let plugins = [
     //     jQuery: 'jquery',
     //     jquery: 'jquery'
     // }),
+
     new CopyWebpackPlugin([
         {
             from: 'source/images',
@@ -50,6 +53,7 @@ let plugins = [
             to: 'fonts'
         },
     ]),
+    new AutoCleanBuildPlugin(),
     new HtmlWebpackPlugin({
         template: 'source/index.html',
         chunks: ['index']
@@ -133,7 +137,6 @@ let baseConfig = {
                     }
                 }, {
                     loader: 'sass-loader', options: {
-                        includePaths: ['node_modules/compass-mixins/lib'],
                         sourceMap: true
                     }
                 }],
@@ -142,6 +145,9 @@ let baseConfig = {
         }, {
             test: /\.(jpe?g|png|gif|svg)$/i,
             use: ['file-loader?name=/images/[name].[ext]']
+        }, {
+            test: /\.(ttf|eot|woff|woff2)$/,
+            use: ['file-loader?name=/fonts/[name].[ext]']
         }]
     },
     plugins: plugins
